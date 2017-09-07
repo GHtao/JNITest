@@ -24,7 +24,8 @@ include_directories(libs/include)
 
 add_library( native-lib
              SHARED
-             src/main/cpp/native-lib.cpp )
+             src/main/cpp/native-lib.cpp
+             src/main/cpp/decoder.c )
 target_link_libraries(#把需要的so库 连接起来
                        native-lib
                         ffmpeg

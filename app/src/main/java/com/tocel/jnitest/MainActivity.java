@@ -2,6 +2,7 @@ package com.tocel.jnitest;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 //        setStringToJNI("12345");
-
+        int i = decoder("in","out");
+        Log.e("gt",i+"");
     }
     @OnClick({R.id.bt_avcodec,R.id.bt_avFilter,R.id.bt_avformat,R.id.bt_configure,R.id.bt_urlPro})
     void doClick(View v){
@@ -77,5 +79,6 @@ public class MainActivity extends AppCompatActivity {
     public native String getAVFormat();
     public native String getConfigure();
     public native String getUrlPro();
+    public native int decoder(String input,String output);
 
 }
