@@ -1,6 +1,7 @@
 package com.tocel.jnitest;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -38,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 //        setStringToJNI("12345");
-        int i = decoder("in","out");
-        Log.e("gt",i+"");
+
     }
     @OnClick({R.id.bt_avcodec,R.id.bt_avFilter,R.id.bt_avformat,R.id.bt_configure,R.id.bt_urlPro})
     void doClick(View v){
@@ -55,7 +55,18 @@ public class MainActivity extends AppCompatActivity {
                 info = getAVFormat();
             break;
             case R.id.bt_configure:
-                info = getConfigure();
+//                info = getConfigure();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String rootDir = Environment.getExternalStorageDirectory()+"/DCIM/Camera";
+                        String input = rootDir+"/VID_20170821_223156.3gp";
+                        String out = rootDir+"/VID_20170821_223156.yuv";
+                        Log.e("gt","input:"+input);
+                        int i = decoder(input,out);
+                        Log.e("gt",i+"");
+                    }
+                }).start();
             break;
             case R.id.bt_urlPro:
                 info = getUrlPro();
