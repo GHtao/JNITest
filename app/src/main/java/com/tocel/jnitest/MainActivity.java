@@ -49,21 +49,31 @@ public class MainActivity extends AppCompatActivity {
                 info = getAVCodec();
             break;
             case R.id.bt_avFilter:
-                info = getAVFilter();
+//                info = getAVFilter();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String rootDir = Environment.getExternalStorageDirectory()+"/DCIM/Camera";
+                        String input = rootDir+"/VID_20170822_042728.3gp";
+                        String out = rootDir+"/VID_20170822_042728.yuv";
+                        Log.e("gt","input:"+input);
+                        int i = decoder(input,out);
+                        Log.e("gt",i+"");
+                    }
+                }).start();
             break;
             case R.id.bt_avformat:
                 info = getAVFormat();
             break;
             case R.id.bt_configure:
-//                info = getConfigure();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         String rootDir = Environment.getExternalStorageDirectory()+"/DCIM/Camera";
-                        String input = rootDir+"/VID_20170821_223156.3gp";
-                        String out = rootDir+"/VID_20170821_223156.yuv";
+                        String out = rootDir+"/VID_20170822_042728.mp4";
+                        String input = rootDir+"/VID_20170822_042728.yuv";
                         Log.e("gt","input:"+input);
-                        int i = decoder(input,out);
+                        int i = encoder(input,out);
                         Log.e("gt",i+"");
                     }
                 }).start();
@@ -91,5 +101,6 @@ public class MainActivity extends AppCompatActivity {
     public native String getConfigure();
     public native String getUrlPro();
     public native int decoder(String input,String output);
+    public native int encoder(String input,String output);
 
 }
