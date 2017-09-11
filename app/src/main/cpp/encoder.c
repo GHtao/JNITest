@@ -83,6 +83,7 @@ Java_com_tocel_jnitest_MainActivity_encoder(JNIEnv *env, jobject instance, jstri
     pCodecCtx->gop_size = 250;
     pCodecCtx->time_base.num = 1;
     pCodecCtx->time_base.den = 25;
+
     //H264
     //pCodecCtx->me_range = 16;
     //pCodecCtx->max_qdiff = 4;
